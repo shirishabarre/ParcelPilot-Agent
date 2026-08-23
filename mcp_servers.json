@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "parcelpilot-docs": {
+      "command": "python3",
+      "args": ["mcp_servers/docs_server/server.py"],
+      "description": "Tool 1: document search/retrieval over policies, SOPs, product docs, and signed customer agreements"
+    },
+    "parcelpilot-data": {
+      "command": "python3",
+      "args": ["mcp_servers/data_server/server.py"],
+      "description": "Tool 2: structured account/order/ticket lookup and cancellation/service-credit/SLA calculations"
+    },
+    "parcelpilot-actions": {
+      "command": "python3",
+      "args": ["mcp_servers/actions_server/server.py"],
+      "description": "Tool 3: mocked state-changing actions (escalations, ticket updates, follow-up tasks), confirm-gated"
+    }
+  }
+}

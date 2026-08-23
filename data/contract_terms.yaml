@@ -1,0 +1,32 @@
+# Structured, numeric terms extracted once from the SOP + signed agreements.
+# calculators.py uses THESE for deterministic math; docs_server.search_documents
+# is still used to fetch/cite the source text that justifies the number.
+# Source of truth: 03_Cancellation_and_Service_Credit_SOP_v4.pdf (default),
+# overridden per-account by 05_Northstar..., 06_LumenWorks...
+
+default_sop:
+  source_doc: 03_Cancellation_and_Service_Credit_SOP_v4.pdf
+  cancellation:
+    booked_grace_minutes: 30
+    booked_fee_inr: 250
+  service_credit:
+    delay_threshold_hours: 2
+    credit_cap_inr: 500
+    credit_percent_of_fee: 0.10
+    manager_approval_above_inr: 1000
+
+account_overrides:
+  ACCT-001:  # Northstar Logistics
+    source_doc: 05_Northstar_Logistics_Enterprise_Agreement.pdf
+    cancellation:
+      waive_fee_if_not_picked_up: true   # no fee regardless of time-since-booking, before pickup
+    service_credit:
+      monthly_aggregate_cap_inr: 5000
+      # no override to threshold/amount -> default SOP formula still applies per-incident
+
+  ACCT-002:  # LumenWorks
+    source_doc: 06_LumenWorks_Service_Agreement.pdf
+    cancellation: {}  # no override -> default SOP applies
+    service_credit:
+      delay_threshold_hours: 4      # replaces default 2h
+      fixed_credit_inr: 300         # replaces default min(500, 10%) formula entirely

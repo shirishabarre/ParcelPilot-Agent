@@ -1,0 +1,122 @@
+{
+  "generated_at": "2026-08-23T03:38:45.134227+00:00",
+  "sla_risk": [
+    {
+      "ticket_id": "TKT-505",
+      "account_id": "ACCT-004",
+      "account_name": "Axis Labs",
+      "plan": "Enterprise",
+      "subject": "Possible API key exposure",
+      "inferred_severity": "P1",
+      "target_minutes": 30,
+      "elapsed_minutes": 150.0,
+      "pct_of_target": 5.0,
+      "risk": "BREACHED",
+      "assigned_to": "Rohit"
+    },
+    {
+      "ticket_id": "TKT-501",
+      "account_id": "ACCT-001",
+      "account_name": "Northstar Logistics",
+      "plan": "Enterprise",
+      "subject": "All shipment creation is failing",
+      "inferred_severity": "P1",
+      "target_minutes": 15,
+      "elapsed_minutes": 30.0,
+      "pct_of_target": 2.0,
+      "risk": "BREACHED",
+      "assigned_to": "Rohit"
+    },
+    {
+      "ticket_id": "TKT-502",
+      "account_id": "ACCT-002",
+      "account_name": "LumenWorks",
+      "plan": "Growth",
+      "subject": "Bulk upload fails for 4,200-row CSV",
+      "inferred_severity": "P2",
+      "target_minutes": 240,
+      "elapsed_minutes": 75.0,
+      "pct_of_target": 0.31,
+      "risk": "OK",
+      "assigned_to": "Maya"
+    },
+    {
+      "ticket_id": "TKT-504",
+      "account_id": "ACCT-001",
+      "account_name": "Northstar Logistics",
+      "plan": "Enterprise",
+      "subject": "SwiftShip order still shows BOOKED after driver pickup",
+      "inferred_severity": "P2",
+      "target_minutes": 60,
+      "elapsed_minutes": 10.0,
+      "pct_of_target": 0.17,
+      "risk": "OK",
+      "assigned_to": "Maya"
+    },
+    {
+      "ticket_id": "TKT-503",
+      "account_id": "ACCT-003",
+      "account_name": "Beacon Retail",
+      "plan": "Standard",
+      "subject": "How do we change the billing contact?",
+      "inferred_severity": "P3",
+      "target_minutes": 960,
+      "elapsed_minutes": 55.0,
+      "pct_of_target": 0.06,
+      "risk": "OK",
+      "assigned_to": "Rohit"
+    }
+  ],
+  "recurring_issue_clusters": [
+    {
+      "cluster_subject_sample": "Bulk upload fails for 4,200-row CSV",
+      "ticket_ids": [
+        "TKT-502",
+        "TKT-451"
+      ],
+      "accounts_involved": [
+        "ACCT-002"
+      ],
+      "multi_customer": false,
+      "count": 2
+    }
+  ],
+  "known_issue_correlation": [
+    {
+      "known_issue": "KI-208",
+      "title": "Bulk Upload failures on large CSVs",
+      "product_status": "Investigating",
+      "matched_tickets": [
+        "TKT-502",
+        "TKT-451"
+      ],
+      "accounts_involved": [
+        "ACCT-002"
+      ],
+      "multi_customer": false,
+      "note": "Link customer to KI-208 (status: Investigating) instead of treating as a new/unrelated bug.",
+      "source_doc": "04_Product_Operations_Guide_and_Known_Issues.pdf"
+    },
+    {
+      "known_issue": "KI-211",
+      "title": "SwiftShip pickup webhook delay",
+      "product_status": "Monitoring",
+      "matched_tickets": [
+        "TKT-504"
+      ],
+      "accounts_involved": [
+        "ACCT-001"
+      ],
+      "multi_customer": false,
+      "note": "Link customer to KI-211 (status: Monitoring) instead of treating as a new/unrelated bug.",
+      "source_doc": "04_Product_Operations_Guide_and_Known_Issues.pdf"
+    }
+  ],
+  "volume_anomalies": [
+    {
+      "account_id": "ACCT-001",
+      "account_name": "Northstar Logistics",
+      "open_ticket_count": 2
+    }
+  ]
+}

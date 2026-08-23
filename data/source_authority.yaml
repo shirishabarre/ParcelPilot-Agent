@@ -1,0 +1,50 @@
+# Precedence: lower number = higher authority.
+# Used by mcp_servers/docs_server/retriever.py to rerank search results,
+# and by agent_core/conflict_detector.py to resolve disagreements.
+
+precedence:
+  signed_customer_agreement: 1     # 05_Northstar_..., 06_LumenWorks_...
+  current_policy_or_sop: 2         # 01_Support_Policy_v3_CURRENT, 03_Cancellation_and_Service_Credit_SOP_v4
+  current_product_doc: 3           # 04_Product_Operations_Guide_and_Known_Issues
+  historical_ticket: 4             # xlsx tickets.historical_resolution -> context only, may be wrong, never cited as policy
+
+excluded_from_answers:
+  # Never used to answer a current question. Retained for audit/history only.
+  - 02_Support_Policy_v2_DEPRECATED.pdf
+
+documents:
+  01_Support_Policy_v3_CURRENT.pdf:
+    doc_type: current_policy_or_sop
+    status: CURRENT
+    effective_date: "2026-05-01"
+    account_scope: all
+
+  02_Support_Policy_v2_DEPRECATED.pdf:
+    doc_type: deprecated
+    status: DEPRECATED
+    effective_date: "2025-01-01"
+    account_scope: all
+
+  03_Cancellation_and_Service_Credit_SOP_v4.pdf:
+    doc_type: current_policy_or_sop
+    status: CURRENT
+    effective_date: "2026-06-15"
+    account_scope: all
+
+  04_Product_Operations_Guide_and_Known_Issues.pdf:
+    doc_type: current_product_doc
+    status: CURRENT
+    effective_date: "2026-08-14"
+    account_scope: all
+
+  05_Northstar_Logistics_Enterprise_Agreement.pdf:
+    doc_type: signed_customer_agreement
+    status: ACTIVE
+    effective_date: "2026-01-01"
+    account_scope: ACCT-001
+
+  06_LumenWorks_Service_Agreement.pdf:
+    doc_type: signed_customer_agreement
+    status: ACTIVE
+    effective_date: "2026-03-01"
+    account_scope: ACCT-002
