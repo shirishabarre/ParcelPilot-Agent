@@ -3,16 +3,24 @@ import streamlit as st
 from google import genai
 
 
-def get_gemini_api_key():
-    api_key = None
-
+def get_config(key, default=None):
     try:
-        api_key = st.secrets.get("GEMINI_API_KEY")
+        value = st.secrets.get(key)
+        if value:
+            return value
     except Exception:
-        api_key = None
+        pass
 
-    if not api_key:
-        api_key = os.getenv("GEMINI_API_KEY")
+    value = os.getenv(key)
+
+    if value:
+        return value
+
+    return default
+
+
+def get_gemini_api_key():
+    api_key = get_config("GEMINI_API_KEY")
 
     if not api_key:
         raise RuntimeError(
@@ -26,13 +34,18 @@ def get_gemini_api_key():
 class GeminiClient:
 
     def __init__(self):
+        self.model = get_config(
+            "GEMINI_MODEL",
+            "gemini-2.0-flash",
+        )
+
         self.client = genai.Client(
             api_key=get_gemini_api_key()
         )
 
     def generate(self, prompt):
         response = self.client.models.generate_content(
-            model="gemini-2.5-flash",
+            model=self.model,
             contents=prompt,
         )
 
@@ -40,4 +53,14 @@ class GeminiClient:
 
 
 def get_llm_client():
+    provider = get_config(
+        "LLM_PROVIDER",
+        "gemini",
+    ).lower()
+
+    if provider != "gemini":
+        raise RuntimeError(
+            f"Unsupported LLM_PROVIDER: {provider}"
+        )
+
     return GeminiClient()
